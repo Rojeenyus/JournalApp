@@ -1,0 +1,23 @@
+<p>
+  <strong>Name:</strong>
+  <%= task.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= task.description %>
+</p>
+<p>
+  <strong>Deadline:</strong>
+  <%= task.deadline %>
+</p>
+
+<p>
+  <%= link_to "Destroy Task", [task.category, task], data: {
+                turbo_method: :delete,
+                turbo_confirm: "Are you sure?"
+              } %>
+</p>
+<p>
+<%= link_to "Edit Task", edit_category_task_path(@category, task) %>
+</p>

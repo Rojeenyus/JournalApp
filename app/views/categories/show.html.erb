@@ -1,13 +1,23 @@
 <h1><%= @category.name %></h1>
 
-  <%= link_to "Edit", edit_category_path(@category) %>
+
+<%= link_to "Create Task", new_category_task_path(@category.id) %>
+  <br><br>
+
+  <h2>Tasks</h2>
+  <%= render @category.tasks %>
+
+<br><br>
+  <%= link_to "Edit Category", edit_category_path(@category) %>
   <br>
-  <%= link_to "Destroy", category_path(@category), data: {
+  <%= link_to "Destroy Category", category_path(@category), data: {
                     turbo_method: :delete,
                     turbo_confirm: "Are you sure?"
                   } %>
 
 <br>
+
+
 <%= link_to "Back", categories_path %>
 
 
