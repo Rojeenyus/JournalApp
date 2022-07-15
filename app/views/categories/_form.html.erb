@@ -1,14 +1,13 @@
 <%= form_with model: @category do |form| %>
-
-<div class="modal-body">
-        <p><%= form.label :name %><br>
+  <div class="modal-body">
+    <p><%= form.label :name %><br>
       <%= form.text_field :name, class: "form-control" %>
       <% @category.errors.full_messages_for(:name).each do |message| %>
-          <div><%= message %></div>
-        <% end %></p>
-      </div>
-      <div class="modal-footer">
-        <%= form.submit :Submit, class: "btn btn-primary" %>
-        <%= link_to "back", categories_path, :class => "btn btn-secondary", :method => "get", :type => "button" %>
-      </div>
-  <% end %>
+        <div><%= message %></div>
+      <% end %></p>
+  </div>
+  <div class="modal-footer">
+    <%= form.submit :Submit, class: "btn btn-primary" %>
+    <%= link_to "back", categories_path, :class => "btn btn-secondary", :method => "get", :type => "button" %>
+  </div>
+<% end %>

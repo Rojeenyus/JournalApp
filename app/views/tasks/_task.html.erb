@@ -6,7 +6,7 @@
     <div class="row">
       <div class="col-sm">
       
-        <%= button_to "Delete Task", [task.category, task], :class => "btn btn-danger", :method => "delete", data: {
+        <%= link_to "Delete Task", [task.category, task], :class => "btn btn-danger", data: {
                 turbo_method: :delete,
                 turbo_confirm: "Are you sure?"
               } %>
