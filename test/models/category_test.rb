@@ -6,6 +6,7 @@ class CategoryTest < ActiveSupport::TestCase
   # end
 def test_creating
   @category = Category.new
+  @category.name = "ronee"
 
   assert_equal @category.save, true
 end

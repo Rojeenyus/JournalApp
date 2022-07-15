@@ -1,3 +1,21 @@
-<h1>New Category</h1>
-
+<div class="container">
+  <h1>To Do List</h1>
+  <%= link_to "New Category", new_category_path %>
+  <ul>
+    <% @categories.each do |category| %>
+      <li>
+        <%= link_to category.name, category %>
+      </li>
+    <% end %>
+  </ul>
+  <div class="modal" tabindex="-1" role="dialog" style="display: block">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Create New Category</h5>
+      </div>
 <%= render "form", category: @category %>
+    </div>
+  </div>
+</div>
+</div>

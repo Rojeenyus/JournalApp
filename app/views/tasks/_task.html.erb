@@ -1,23 +1,20 @@
-<p>
-  <strong>Name:</strong>
-  <%= task.name %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= task.description %>
-</p>
-<p>
-  <strong>Deadline:</strong>
-  <%= task.deadline %>
-</p>
-
-<p>
-  <%= link_to "Destroy Task", [task.category, task], data: {
+<tr>
+  <td><%= task.name %></td>
+  <td><%= task.description %></td>
+  <td><%= task.deadline %></td>
+  <td>
+    <div class="row">
+      <div class="col-sm">
+      
+        <%= button_to "Delete Task", [task.category, task], :class => "btn btn-danger", :method => "delete", data: {
                 turbo_method: :delete,
                 turbo_confirm: "Are you sure?"
               } %>
-</p>
-<p>
-<%= link_to "Edit Task", edit_category_task_path(@category, task) %>
-</p>
+             
+      </div>
+      <div class="col-sm">
+        <%= button_to "Edit Task", edit_category_task_path(@category, task), :method => "get", :class => "btn btn-warning" %>
+      </div>
+    </div>
+  </td>
+</div>
