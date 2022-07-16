@@ -1,25 +1,39 @@
-require "test_helper"
+require 'test_helper'
 
 class TasksControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end
-  test "should create task" do
-    @category = Category.create(name: "ronee")
-    @category.save
-    @category = Category.find_by(name: "ronee")
-    @task = @category.tasks.create(name: "doing", description: "hi im ronee")
-    assert_equal @category.tasks.length, 1
+  test 'should create task' do
+    @category = categories(:one)
+    post categories_path(@category), params: { category: { name: @category.name } }
+    @task = tasks(:one)
+    post category_tasks_path(@category, @task), params: { task: { name: @task.name, description: @task.description } }
+    assert_response :redirect
   end
 
-  # test "should delete task" do
-  #   post categories_path, params: {"category": { "name": "Personal"}}
-  #   @category = Category.find(params[:category_id])
-  #   post category_tasks_path, params: {"task": { "name": "Personal", "description": "Personal ito hoy"}}
-  #   @category = Category.find(params[:category_id])
-  #   @task = @category.tasks.find(params[:id])
-  #   @task.destroy
-  #   assert_equal @category.tasks.length, 0
-  # end
+  test 'should destroy task' do
+    @task = tasks(:one)
+    delete category_task_path(@task.category_id, @task.id)
+    assert_redirected_to category_path(@task.category_id)
+  end
+
+  test 'should show new task' do
+    @task = tasks(:one)
+    get new_category_task_path(@task.category_id, @task.id)
+    assert_response :success
+  end
+
+  test 'should show edit task' do
+    @task = tasks(:one)
+    get edit_category_task_path(@task.category_id, @task.id)
+    assert_response :success
+  end
+
+  test 'should update task' do
+    @task = tasks(:one)
+    patch category_task_path(@task.category_id, @task.id), params: { task: { name: 'hey', description: 'hey' } }
+    assert_response :redirect
+  end
 
 end

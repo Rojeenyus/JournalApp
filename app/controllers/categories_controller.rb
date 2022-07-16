@@ -9,6 +9,7 @@ class CategoriesController < ApplicationController
   end
 
   def create
+    @categories = Category.all
     @category = Category.new(category_params)
 
     if @category.save
@@ -29,6 +30,7 @@ class CategoriesController < ApplicationController
   end
 
   def update
+    @categories = Category.all
     @category = Category.find(params[:id])
 
     if @category.update(category_params)
