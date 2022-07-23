@@ -1,13 +1,4 @@
 require 'test_helper'
 
 class CreateCategoryTest < ActionDispatch::IntegrationTest
-    test "should create new category" do
-        get new_category_path
-        assert_response :success
-
-        assert_difference 'Category.count', 1 do
-            post categories_path, params: {category: {name: "Personal"}}
-            assert_response :redirect
-        end
-    end
 end

@@ -1,0 +1,15 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand px-3" href="#">To Do List</a>
+  <div class="navbar-collapse d-flex justify-content-end">
+    <span class="navbar-text px-3">
+      <a class="nav-link" href="#"><%- if controller_name != 'sessions' %>
+            <%= link_to "Log in", new_session_path(resource_name) %><br />
+          <% end %></a>
+    </span>
+    <span class="navbar-text px-3">
+      <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+        <%= link_to "Sign up", new_registration_path(resource_name) %><br />
+      <% end %>
+    </span>
+  </div>
+</nav>

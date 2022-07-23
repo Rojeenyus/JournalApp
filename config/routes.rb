@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   root "categories#index"
 
   resources :categories do
-    resources :tasks
+    resources :tasks do
+      collection do 
+        get 'remove_all'
+      end
+    end
   end
 
   # get '/categories' => 'categories#index'

@@ -1,9 +1,10 @@
+<%= render "navbar", category: @category, user: @user %>
 <div class="d-flex justify-content-center">
   <div class="position-absolute top-50 start-50 translate-middle">
-    <p class="notice"><%= notice %> </p>
-    <p class="alert"><%= alert %> </p>
-    <%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete } %>
-    <h1 class="d-flex justify-content-center">Ronee's To Do List</h1>
+    <div class="d-flex justify-content-center">
+      <p class="notice" style="color: green"><%= notice %> </p>
+    </div>
+    <%= render "deadline", category: @category, user: @user, task: @task %>
     <div class="d-flex justify-content-center">
       <%= link_to "Create New Category +", new_category_path, :class => "btn btn-primary" %>
     </div>
@@ -15,27 +16,29 @@
         </tr>
       </thead>
       <tbody>
-        <% @categories.each do |category| %>
-          <tr>
-            <td><%= category.name %></td>
-            <td>
-              <div class="row">
-                <div class="col-sm">
-                  <%= link_to "View", category, :class => "btn btn-light"
+        <% @user.categories.each do |category| %>
+          <% if !!category.id %>
+            <tr>
+              <td><%= category.name %></td>
+              <td>
+                <div class="row">
+                  <div class="col-sm">
+                    <%= link_to "View", category, :class => "btn btn-light"
                  %>
-                </div>
-                <div class="col-sm">
-                  <%= link_to "Edit", edit_category_path(category), :class => "btn-warning btn", :method => "get" %>
-                </div>
-                <div class="col-sm">
-                  <%= link_to "Delete", category_path(category), :class => "btn-danger btn", data: {
+                  </div>
+                  <div class="col-sm">
+                    <%= link_to "Edit", edit_category_path(category), :class => "btn-warning btn", :method => "get" %>
+                  </div>
+                  <div class="col-sm">
+                    <%= link_to "Delete", category_path(category), :class => "btn-danger btn", data: {
                     turbo_method: :delete,
                     turbo_confirm: "Are you sure?"
                   } %>
+                  </div>
                 </div>
-              </div>
-            </td>
-          </tr>
+              </td>
+            </tr>
+          <% end %>
         <% end %>
       </tbody>
     </table>

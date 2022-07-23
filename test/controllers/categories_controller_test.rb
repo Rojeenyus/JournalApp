@@ -1,6 +1,16 @@
 require 'test_helper'
 
 class CategoriesControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+
+  setup do
+    @user = users(:user1)
+    sign_in users(:user1)
+    @category = categories(:one)
+    @task = tasks(:one)
+    @tasks = @user.tasks.where("deadline = ?", Date.today.midnight)
+  end
+
   test 'should get index' do
     get categories_path
     assert_response :success
@@ -12,6 +22,14 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test 'should redirect if not the owner' do
+    @category = categories(:one)
+    sign_out users(:user1)
+    sign_in users(:two)
+    get category_url(@category)
+    assert_redirected_to categories_path
+  end
+
   test 'should create category' do
     post categories_path, params: { "category": { "name": 'Personal' } }
     assert_response :redirect
@@ -21,6 +39,11 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
     @category = categories(:one)
     @categories = Category.all
     get edit_category_url(@category)
+    assert_response :success
+  end
+
+  test 'should show new category' do
+    get new_category_url(@category)
     assert_response :success
   end
 

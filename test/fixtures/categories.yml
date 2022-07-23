@@ -2,6 +2,8 @@
 
 one:
   name: MyString
+  user: user1
 
 two:
-  name: MyString
+  name: ''
+  user: user1

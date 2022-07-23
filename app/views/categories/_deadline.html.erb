@@ -1,0 +1,25 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Deadline Today</th>
+      <th scope="col" class="">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= task.name %></td>
+        <td>
+          <div class="row">
+            <div class="col-sm">
+              <%= link_to "Delete", [task.category, task], :class => "btn btn-danger", data: {
+                turbo_method: :delete,
+                turbo_confirm: "Are you sure?"
+              } %>
+            </div>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

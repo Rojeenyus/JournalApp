@@ -1,5 +1,11 @@
 class CategoriesController < ApplicationController
   before_action :authenticate_user!
+  before_action :user
+
+  def user
+    @user = User.find(current_user.id)
+    @tasks = @user.tasks.where("deadline = ?", Date.today.midnight)
+  end
 
   def index
     # render json: {success: true}, status:
@@ -8,11 +14,14 @@ class CategoriesController < ApplicationController
 
   def show
     @category = Category.find(params['id'])
+    unless @category.user_id == current_user.id
+      redirect_to categories_path
+    end
   end
 
   def create
     @categories = Category.all
-    @category = Category.new(category_params)
+    @category = @user.categories.new(category_params)
 
     if @category.save
       redirect_to @category

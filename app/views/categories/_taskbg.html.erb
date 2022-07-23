@@ -1,3 +1,4 @@
+<%= render "categories/navbar", category: @category, user: @user %>
 <div class="container mt-4">
 <div class="d-flex align-items-center">
 <%= button_to "<", categories_path, :class => "btn btn-light", :method => "get" %>
@@ -5,6 +6,9 @@
 </div>
 
 <%= button_to "Create Task +", new_category_task_path(@category.id), :class => "btn-primary btn", :method => "get" %>
+<%= link_to "Delete All", remove_all_category_tasks_path(@category.id), :class => "btn-warning btn", data: {
+                turbo_confirm: "Are you sure to delete all?"
+              } %>
 
 <table class="table table-striped">
   <thead>
